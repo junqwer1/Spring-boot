@@ -37,4 +37,7 @@ public class Member extends BaseEntity {
     @Column(length = 10, nullable = false)
     private Authority authority;
 
+    @OneToOne // address_seq
+    private Address address;
+
 }
