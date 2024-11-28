@@ -37,6 +37,11 @@ dependencies {
 	// https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc11
 	runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
 
+	// https://mvnrepository.com/artifact/com.querydsl/querydsl-apt
+	annotationProcessor 'com.querydsl:querydsl-apt:5.1.0'
+// https://mvnrepository.com/artifact/com.querydsl/querydsl-jpa
+	implementation 'com.querydsl:querydsl-jpa:5.1.0'
+
 
 	testImplementation ('com.github.javafaker:javafaker:1.0.2') { exclude module: 'snakeyaml' }
 	testImplementation group: 'org.yaml', name: 'snakeyaml', version: '2.2'
