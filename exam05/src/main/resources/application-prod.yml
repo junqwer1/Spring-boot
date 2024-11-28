@@ -1,0 +1,7 @@
+spring:
+  thymeleaf:
+    cache: true
+    prefix: classpath:/templates/
+
+file:
+  upload.path: D:/uploads2/
