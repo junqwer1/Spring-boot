@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Lazy;
 @Configuration
 @RequiredArgsConstructor
 public class BeanConfig {
+
     @PersistenceContext
     private EntityManager em;
 
