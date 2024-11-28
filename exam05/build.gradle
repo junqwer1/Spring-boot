@@ -38,9 +38,9 @@ dependencies {
 	runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
 
 	// https://mvnrepository.com/artifact/com.querydsl/querydsl-apt
-	annotationProcessor 'com.querydsl:querydsl-apt:5.1.0'
+	annotationProcessor 'com.querydsl:querydsl-apt:5.1.0:jakarta'
 // https://mvnrepository.com/artifact/com.querydsl/querydsl-jpa
-	implementation 'com.querydsl:querydsl-jpa:5.1.0'
+	implementation 'com.querydsl:querydsl-jpa:5.1.0:jakarta'
 
 
 	testImplementation ('com.github.javafaker:javafaker:1.0.2') { exclude module: 'snakeyaml' }
