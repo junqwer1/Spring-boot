@@ -20,11 +20,11 @@ public class BoardData extends BaseEntity {
     @Column(nullable = false)
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY) // 즉시 조인
     @JoinColumn(name = "bid") // 외래키 이름을 직접 지정
     private Board board;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY) // 즉시 조인
     private Member member;
 
     @ManyToMany
