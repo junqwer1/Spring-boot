@@ -123,7 +123,7 @@ public class Ex08 {
         items.remove(1);
         boardRepository.flush();
         boardDataRepository.flush();
-//        boardRepository.delete(board);
-//        boardRepository.flush();
+        //boardRepository.delete(board);
+        //boardRepository.flush();
     }
 }
