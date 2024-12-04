@@ -1,17 +1,24 @@
 package org.koreait.member.controllers;
 
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.koreait.global.exceptions.BadRequestException;
 import org.koreait.member.constants.Authority;
 import org.koreait.member.entities.Member;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -50,8 +57,38 @@ public class ApiMemberController {
         return members;
     }
 
+    /*
+     * @RequestBody 커맨드객체 앞에 적용하면 요청 바디의 데이터 형식이 application/json임을 알게 된다.
+     * */
+    @ResponseStatus(HttpStatus.CREATED) // 201
     @PostMapping("/test3")
-    public void test3(RequestLogin form) {
-        log.info(form.toString());
+    public void test3(@RequestBody @Valid RequestLogin form, Errors errors) {
+        if (errors.hasErrors()){
+            String message = errors.getAllErrors().stream().flatMap/*2차원을 1차원으로*/(c -> Arrays.stream(c.getCodes())).collect(Collectors.joining(","));
+            throw new BadRequestException(message);
+        }
     }
+
+    @ExceptionHandler(Exception.class)
+    public String errorHandler() {
+        return null;
+    }
+
+    /*public ResponseEntity<Void> test3(@RequestBody RequestLogin form) {
+        return ResponseEntity.noContent().build();
+    }*/
+    /*public ResponseEntity<Void> test3(@RequestBody RequestLogin form) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .header("KOREAIT", "FIGHTING")
+                .build(); // 응답 바디 데이터가 없는 경우
+    }*/
+    /*public ResponseEntity<RequestLogin> test3(@RequestBody RequestLogin form) {
+//        log.info(form.toString());
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .header("KOREAIT", "FIGHTING!")
+                .body(form);
+    }*/
+    /*public void test3(@RequestBody RequestLogin form) {
+        log.info(form.toString());
+    }*/
 }

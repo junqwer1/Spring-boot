@@ -1,5 +1,6 @@
 package org.koreait.rests;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.type.TrueFalseConverter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.koreait.member.controllers.ApiMemberController;
 import org.koreait.member.controllers.RequestLogin;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -16,13 +18,15 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.lang.runtime.ObjectMethods;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
 
 @SpringBootTest
-@AutoConfigureWebMvc
+@AutoConfigureMockMvc
 @ActiveProfiles({"default","test"})
 public class Ex01 {
 
@@ -48,7 +52,8 @@ public class Ex01 {
     @Test
     void test2() throws Exception{
         mockMvc.perform(post("/api/member/test3")
-                        .contentType(MediaType.APPLICATION_FORM_URLENCODED) //application/x-www-form-urlencoded
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        //application/x-www-form-urlencoded
                 .param("email", "user01@test.org")
                 .param("password", "12345678")
                 .param("saveEmail", "true")
@@ -63,8 +68,18 @@ public class Ex01 {
     @Test
     void test3() throws Exception {
         RequestLogin form = new RequestLogin();
-        form.setEmail("user01@test.org");
+//        form.setEmail("user01@test.org");
         form.setPassword("12345678");
         form.setSaveEmail(true);
+
+        ObjectMapper om = new ObjectMapper();
+        String json = om.writeValueAsString(form);
+
+        System.out.println(json);
+
+        mockMvc.perform(post("/api/member/test3")
+                        .contentType(MediaType.APPLICATION_JSON) // Content-Type : application/json
+                .content(json)
+        ).andDo(print());
     }
 }
