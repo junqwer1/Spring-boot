@@ -17,7 +17,8 @@ public class Board extends BaseEntity {
     private String bname; // 게시판명
 
     @ToString.Exclude // ToString 메서드에서 배제
-    @OneToMany(mappedBy = "board", cascade = {CascadeType.REMOVE, CascadeType.PERSIST}, orphanRemoval = true) // 관계 주인 BoardData의 외래키 참조인 board
+    @OneToMany(mappedBy = "board", cascade = {CascadeType.REMOVE, CascadeType.PERSIST},
+            orphanRemoval = true) // 관계 주인 BoardData의 외래키 참조인 board
     private List<BoardData> items;
 
 }
