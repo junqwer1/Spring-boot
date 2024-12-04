@@ -1,9 +1,11 @@
 package org.koreait.member.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.koreait.member.constants.Authority;
 import org.koreait.member.entities.Member;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/member")
 public class ApiMemberController {
@@ -45,5 +48,10 @@ public class ApiMemberController {
             members.add(member);
         }
         return members;
+    }
+
+    @PostMapping("/test3")
+    public void test3(RequestLogin form) {
+        log.info(form.toString());
     }
 }
