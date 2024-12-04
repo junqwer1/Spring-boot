@@ -69,10 +69,10 @@ public class ApiMemberController {
         }
     }
 
-    @ExceptionHandler(Exception.class)
+    /*@ExceptionHandler(Exception.class)
     public String errorHandler() {
         return null;
-    }
+    }*/
 
     /*public ResponseEntity<Void> test3(@RequestBody RequestLogin form) {
         return ResponseEntity.noContent().build();
